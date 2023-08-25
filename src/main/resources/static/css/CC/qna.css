@@ -1,0 +1,83 @@
+
+    h1{
+    text-align:center;
+    }
+
+    .layout{
+    width:80%;
+    margin : auto;
+    margin-top: 40px;
+    }
+
+    #notice-box{
+    height : 100px;
+    background : #f8f8f8;
+    width : 90%;
+    margin: auto;
+    margin-top: 105px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    }
+
+
+    table{
+    border-top: solid 3px #26A9E0;
+    }
+
+    table th{
+    width : 200px;
+    border-left:solid #f8f8f8;
+    background : #f8f8f8;
+    }
+
+    table tr{
+    height: 50px;
+    }
+
+    table td{
+    border-right:solid #fff;
+    }
+
+    .qna-tb{
+    border-collapse: collapse;
+    width:90%;
+    margin:auto;
+    margin-top: 30px;
+    }
+
+    .submit-btn{
+    margin-top: 60px;
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+    color : #fff;
+    border: #26A9E0;
+    background : #26A9E0;
+    }
+
+    #title{
+    height: 30px;
+    width : 90%;
+    }
+
+    select{
+    height: 40px;
+    width : 20%;
+    }
+    textarea{
+    height: 200px;
+    width : 95%;
+    }
+
+    .boldtext{
+    color :#26A9E0;
+    }
+
+    .right-text{
+    float:right;
+    }
+
+    .submit-btn-outer{
+    text-align : center;
+    width : 70%;
+    }

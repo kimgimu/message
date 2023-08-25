@@ -1,0 +1,38 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="chatModalFragment">
+
+        <button class="s-chat-connect-button" id="s-chat-connect-button">
+            <img class="s-modalImg" src="/sc/chat.png">
+        </button>
+
+    <div class="s-chatbox">
+
+        <div class="s-chat-closebox">
+            <span>실시간 채팅방</span>
+            <button class="s-chat-close">
+            </button>
+        </div>
+
+        <div class="s-chat-textbox">
+
+        </div>
+
+        <div class="s-chat-sendbox">
+            <textarea name="" id="s-chat-input" cols="24"></textarea>
+            <input id="s-chat-sender" type="hidden" th:value="${userEmail}">
+            <img id="s-chat-input-img" src="" alt="">
+            <script>
+
+
+
+            </script>
+        </div>
+
+    </div>
+
+</div>
+
+</html>
+
+

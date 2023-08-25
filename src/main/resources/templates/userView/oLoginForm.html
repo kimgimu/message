@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layouts/include_footer_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <!-- 부트스트랩 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+        <!-- * 부트스트랩으로 인한 충돌 / 헤더 위치 조정중 -->
+        .n-header-list {
+            margin: 16px 0px;
+            padding: 0px 0px 0px 40px;
+        }
+        .form-floating {
+            width: 350px;
+        }
+        .form-check {
+            width: 350px;
+           <!-- display: flex; justify-content: right;
+            부트스트랩 충돌-인라인 태그로-->
+        }
+        #oInner-container {
+            width: 400px;
+            height: 700px;
+        }
+        #oLoginTitle {
+            padding: 20px 50px;
+            margin: 0px;
+        }
+        .fieldError {
+            font-size: 10px;
+            color: red;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            $(".form-control").keyup(function(){
+                var emailValue = $(this).val();
+                if (emailValue == null || emailValue === '' || emailValue.length < 5) {
+                    $("#check").css("display","block");
+                } else {
+                    $("#check").css("display","none"); // Reset the color if the value is not empty
+                }
+            });
+        });
+    </script>
+    <!-- 네이버 로그인 script -->
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+<body layout:fragment="content">
+    <span th:if="${userEmail == null}">    <!-- 로그인 안한 상태 -->
+        <div class="container mt-5" id="oInner-container" align="center">
+            <div id="oLoginTitle">
+                <h3 class="h3 fw-bold">로그인</h3>
+            </div>
+            <form th:action="@{/member/qLoginBasic}" method="POST" th:object="${memberDTO}">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="email" name="email" placeholder="${session.memberDTO.email}" autofocus="autofocus"
+                           th:field="*{email}" th:class="${#fields.hasErrors('email')} ? 'form-control fieldError' : 'form-control'" />
+                    <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="font-size:12px; text-align: left; color: red;">Incorrect data</p>
+                    <label th:for="email">이메일 주소</label>
+<!--                    <div id="check" style="display:none; text-align:left; color:red;">123</div>-->
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="password" name="pwd" placeholder="Password" autocomplete="off"
+                        th:field="*{pwd}" th:class="${#fields.hasErrors('pwd')} ? 'form-control fieldError' : 'form-control'" />
+                    <label th:for="password">비밀번호</label>
+                    <p th:if="${#fields.hasErrors('pwd')}" th:errors="*{pwd}" style="font-size:12px; text-align: left; color: red;">Incorrect data</p>
+                </div>
+                <!-- 아이디 저장 체크박스 -->
+                <div class="form-check" style="display: flex; justify-content:space-between; font-size:13px;">
+                    <div>
+                      <input class="form-check-input" type="checkbox"
+                             id="oSaveId" name="oSaveId" style="margin-right:5px;">
+                      <label class="form-check-label ml-3" for="oSaveId">
+                        이메일 저장
+                      </label>
+                    </div>
+                    <div><a th:href="@{/member/qFindMemberInfo}" style="color:#212529;">이메일/비밀번호 찾기</a></div>
+                </div>
+                <div class="form-floating">
+                    <input type="submit" class="btn btn-dark mt-2 mb-2 w-100" style="height: 48px;" value="로그인" />
+<!--                    <button type="button" class="btn btn-dark mb-3 mt-3" onclick="location.href='/member/qJoinForm'" style="width:46%;">회원가입</button>-->
+                </div>
+            </form>
+
+            <div class="container" id="oLoginSns" style="mt-5 mb-5">
+                <hr style="width: 380px;"/>
+                <!-- 네이버 로그인 버튼 노출 영역 -->
+                <div id="naver_id_login"></div>
+                <!-- //네이버 로그인 버튼 노출 영역 -->
+                <p style="font-weight: bold; margin-bottom: 20px;">Login with SNS</p>
+                <div class="oLoginSnsBtn-container"
+                     style="display: flex; justify-content: space-between;">
+                    <!-- 카카오 로그인 (공백 넣으면 에러. 한줄로!)-->
+                    <a th:href="@{https://kauth.kakao.com/oauth/authorize?client_id=fae91fecfb7dbda2a80ae22881709a28&redirect_uri=http://localhost:8081/member/qLogin&response_type=code}">
+                        <img src="/images/kakao_login_medium_narrow.png" alt="kakaoLogin" height="44" />
+                    </a>
+                    <!-- 네이버 로그인 -->
+                    <a th:href="@{/member/qLoginNaver}">
+                        <img src="/images/btnG_완성형.png" alt="naverLogin" height="44" />  <!-- 카카오 로그인과 높이만 맞춤 -->
+                    </a>
+                </div>
+            </div>
+        </span>
+    </div>
+
+    <script type="text/javascript">
+        var naver_id_login = new naver_id_login("KxGhFHZ7Xp74X_5IZ23h", "http://localhost:8081/member/qLoginNaverCallback");
+        var state = naver_id_login.getUniqState();
+        naver_id_login.setButton("green", 4,45);
+        naver_id_login.setDomain("http://localhost:8081/member/testnaverLogin");
+        naver_id_login.setState(state);
+        naver_id_login.setPopup();
+        naver_id_login.init_naver_id_login();
+    </script>
+    <script type="text/javascript">
+<!--        $(function() {-->
+<!--               fnInit();-->
+<!--         });-->
+
+<!--         function frm_check(){-->
+<!--             saveid();-->
+<!--         }-->
+
+<!--        function fnInit(){-->
+<!--            var cookieid = getCookie("saveid");-->
+<!--            console.log(cookieid);-->
+<!--            if(cookieid !=""){-->
+<!--                $("input:checkbox[id='oSaveId']").prop("checked", true);-->
+<!--                $('#email').val(cookieid);-->
+<!--            }-->
+<!--        }-->
+
+<!--        function setCookie(name, value, expiredays) {-->
+<!--            var todayDate = new Date();-->
+<!--            todayDate.setTime(todayDate.getTime() + 0);-->
+<!--            if(todayDate > expiredays){-->
+<!--                document.cookie = name + "=" + escape(value) + "; path=/; expires=" + expiredays + ";";-->
+<!--            }else if(todayDate < expiredays){-->
+<!--                todayDate.setDate(todayDate.getDate() + expiredays);-->
+<!--                document.cookie = name + "=" + escape(value) + "; path=/; expires=" + todayDate.toGMTString() + ";";-->
+<!--            }-->
+<!--            console.log(document.cookie);-->
+<!--        }-->
+
+<!--        function getCookie(Name) {-->
+<!--            var search = Name + "=";-->
+<!--            console.log("search : " + search);-->
+
+<!--            if (document.cookie.length > 0) { // 쿠키가 설정되어 있다면-->
+<!--                offset = document.cookie.indexOf(search);-->
+<!--                console.log("offset : " + offset);-->
+<!--                if (offset != -1) { // 쿠키가 존재하면-->
+<!--                    offset += search.length;-->
+<!--                    // set index of beginning of value-->
+<!--                    end = document.cookie.indexOf(";", offset);-->
+<!--                    console.log("end : " + end);-->
+<!--                    // 쿠키 값의 마지막 위치 인덱스 번호 설정-->
+<!--                    if (end == -1)-->
+<!--                        end = document.cookie.length;-->
+<!--                    console.log("end위치  : " + end);-->
+
+<!--                    return unescape(document.cookie.substring(offset, end));-->
+<!--                }-->
+<!--            }-->
+<!--            return "";-->
+<!--        }-->
+
+<!--        function saveid() {-->
+<!--            var expdate = new Date();-->
+<!--            if ($("#saveId").is(":checked")){-->
+<!--                expdate.setTime(expdate.getTime() + 1000 * 3600 * 24 * 30);-->
+<!--                setCookie("saveid", $("#logId").val(), expdate);-->
+<!--                }else{-->
+<!--               expdate.setTime(expdate.getTime() - 1000 * 3600 * 24 * 30);-->
+<!--                setCookie("saveid", $("#logId").val(), expdate);-->
+<!--            }-->
+<!--        }-->
+    </script>
+
+    <!-- 부트스트랩 script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>
+
+<!--
+    - kakao REST API 키
+        fae91fecfb7dbda2a80ae22881709a28 server port:8082
+    - naver Client ID
+        KxGhFHZ7Xp74X_5IZ23h
+            Client Secret (yrJitK_hXC)
+
+    - CSS -> footer 하단에 고정 참고 link
+        https://jineecode.tistory.com/103
+-->
+<!--            <h1 th:each="meberList : ${members}"></h1>-->
+<!--            <h1 th:text="${members.name}"></h1>-->
+<!--            <h1 th:text="${members.email}"></h1>-->

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layouts/include_footer_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <!-- favicon -->
+    <!-- 부트스트랩 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+          crossorigin="anonymous">
+    <style>
+        .o-lnb {
+            min-width: 1000px;
+            height: 50px;
+            background-color: #ededed;
+        }
+        #o-container {
+            height: 800px;
+        }
+        .o-wrapper {
+            position: relative;
+            display: block;
+            margin: 0 auto;
+            width: 1000px;
+
+        }
+        .o-lnb-list {
+            font-family: 'Noto Sans KR', sans-serif;
+            height: 50px;
+            float: left;
+            display: flex;
+            padding-left: 20px;
+            line-height: 1;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .o-lnb-item {
+            position: relative;
+            display: inline-flex;
+            margin-right: 15px;
+            align-items: center;
+        }
+        .o-lnb-item a {
+            font-weight: bold;
+            color: #7790ad;
+            font-size: 13px;
+            text-decoration-line: none;
+        }
+       .form-floating {
+           width: 350px;
+       }
+       #oJoinBtn-container {
+           display: flex;
+           justify-content: space-evenly;
+       }
+       #oInner-container-join {
+           width: 400px;
+           height: 600px;
+       }
+       #oJoinTitle {
+           padding: 20px 50px;
+           margin: 0px;
+       }
+       #btnEmailCheck {
+           width: 90px;
+           margin-left: 6px;
+       }
+       .oAgree {
+           margin-right: 5px;
+       }
+       .oAgree-li {
+           margin: 10px;
+       }
+       .oAgree span {
+           color: blue;
+       }
+
+       .mustch {
+           font-weight: bold;
+           color: blue;
+       }
+    </style>
+
+</head>
+<body layout:fragment="content">
+
+<!-- 마이페이지 네비게이션 -->
+<div id="oContainer">
+    <div id="content">
+        <div class="o-lnb">
+            <div class="o-wrapper">
+                <ul class="o-lnb-list">
+                    <li class="o-lnb-item"><a href="#">내정보</a></li>
+                    <li class="o-lnb-item"><a href="/member/qMyInfoUpdate">내정보수정</a></li>
+                    <li class="o-lnb-item"><a href="#">비밀번호변경</a></li>
+                    <li class="o-lnb-item"><a href="#">관심매물</a></li>
+                    <li class="o-lnb-item"><a href="#">매물관리</a></li>    <!-- 지현이 게시판 양식 받아서 적용(일관성) -->
+                    <li class="o-lnb-item"><a href="#">최근본매물</a></li>   <!-- 지현이 게시판 양식 받아서 적용(일관성) -->
+                    <li class="o-lnb-item"><a href="#">1:1문의내역</a></li> <!-- 지현이 게시판 양식 받아서 적용(일관성) -->
+                </ul>
+            </div>
+        </div>
+
+        <div class="oContainer-wrap">
+            <div class="container mt-5" id="oInner-container-join" style="background-color:white" align="center">
+                <!--            <img src="/images/qLogoForm.png" alt="logoImage" style="margin-bottom: 10px;">-->
+                <div id="oJoinTitle">
+                    <h3 class="h3 fw-bold">내 정보 수정</h3>
+                </div>
+                <form th:action="@{/member/qUpdateMember}" method="POST">
+                    <input type="hidden" id="idx" value="${memberDTO.idx}" />
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="name" name="name" th:value="${name}" autofocus="autofocus" />
+                        <label th:for="name">이름(실명)</label>
+                    </div>
+                    <div class="form-floating mb-3 mr-3" style="display:flex; flex-wrap:wrap">
+                        <input type="text" class="form-control" id="email" th:value="${userEmail}" name="email" disabled="disabled" />
+                        <label th:for="email">이메일 주소</label>
+                        <div class="form-floating" id="emailErr" style="text-align:left; color:red; font-size:12px;"></div>
+                    </div>
+
+                    <div class="form-floating" align="left" style="font-size: 12px;";>
+                        <ul style="list-style: none; padding: 0px; margin: 20px 0px 20px 0px; border-radius: 7px; border: 1px solid #dee2e6;">
+                            <li class="oAgree-li">
+                                <div>
+                                    <h3 class="h3"></h3>
+                                </div>
+                                <div>
+                                    <input type="checkbox" class="oAgree"><b>전체 동의하기</b>
+                                </div>
+                            </li>
+                            <li class="oAgree-li">
+                                <div>
+                                    <input type="checkbox" class="oAgree"><span class="mustch">[필수] </span>만14세 이상입니다.
+                                </div>
+                            </li>
+                            <li class="oAgree-li">
+                                <div>
+                                    <input type="checkbox" class="oAgree"><span class="mustch">[필수] </span>이용약관 동의
+                                </div>
+                            </li>
+                            <li class="oAgree-li">
+                                <div>
+                                    <input type="checkbox" class="oAgree"><span class="mustch">[필수] </span>개인정보 수집·이용 동의
+                                </div>
+                            </li>
+                            <li class="oAgree-li">
+                                <div>
+                                    <input type="checkbox" class="oAgree"><span class="mustch">[필수] </span>위치 기반 서비스약관 동의
+                                </div>
+                            </li>
+                            <li class="oAgree-li">
+                                <div>
+                                    <input type="checkbox" class="oAgree"><span class="mustch">[필수] </span>매물 관리 정책 동의
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div id="oJoinBtn-container">
+                        <input type="button" class="btn btn-dark"
+                               th:onclick="|location.href='@{/}'|" value="취소" style="width:47%" />
+                        <input type="submit" class="btn btn-dark" value="수정" style="width:47%" />
+                        <!-- th:onclick="|location.href='@{/member/qLoginForm}'|"-->
+                    </div>
+                </form>
+
+                <div class="container" id="oJoinSns" style="mt-5 mb-5">
+                    <hr style="width: 380px;"/>
+                    <button type="button" class="btn btn-outline-dark" onclick="location.href='#">회원탈퇴</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 부트스트랩 script -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+</body>
+</html>

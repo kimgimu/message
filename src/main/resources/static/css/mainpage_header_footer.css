@@ -1,0 +1,129 @@
+/*웹 폰트 불러오기*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+body{
+padding:0;
+margin:0;
+min-width:1800px;
+}
+
+/*헤더 컨테이너*/
+.n-header{
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 25px;
+    transition: 0.5s;
+    border-bottom: 1px solid rgb(199, 199, 199);
+}
+
+/*헤더부분 hover시 배경색이 흰색으로 바뀐다*/
+.n-header:hover{
+    background-color: white;
+}
+
+/*flex 정렬을 위해 오른쪽 왼쪽 나뉨*/
+.n-header-left{
+    display: flex;
+    align-items: center;
+}
+
+.n-header-right{
+    display: flex;
+    align-items: center;
+}
+
+/*로고이미지*/
+.n-header img{
+  height: 40px;
+}
+
+/*헤더부분 hover시 로고 색 변경*/
+.n-header:hover img{
+    filter: invert(48%) sepia(100%) saturate(2222%) hue-rotate(160deg) brightness(93%) contrast(107%);
+}
+
+/*실거래가조회~고객센터까지의 a태그를 담은 ul 컨테이너*/
+.n-header-list{
+  list-style: none;
+}
+
+/*
+li 기본값이 하단으로 추가되는걸 가로정렬로 변경
+로고이미지랑 여백차이안나게 a태그들 위치조정, 간격조정
+*/
+.n-header-list li{
+    float: left;
+    margin-right: 30px;
+    margin-top: 2px;
+}
+
+/*
+헤더부분 hover시 a태그가 검은색으로 바뀌는데
+그 안에서 개별적으로 a hover시엔 파랑색으로 바뀐다
+*/
+.n-header-list li a:hover{
+    color: #00AAE6;
+}
+
+/*
+a태그 기본값인 색,밑줄 설정제거, 폰트, 사이즈조정
+*/
+.n-header a{
+    text-decoration: none;
+    color: white;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+}
+
+/*헤더부분 hover시 a태그 색 변경*/
+.n-header:hover a{
+    color: #222;
+}
+
+
+/*푸터부분*/
+.r-footer {
+    position: relative;
+    width:100%;
+    bottom: 0;
+    height: 160px;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+    background-color:white;
+}
+
+.r-footer-wrap {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 60%;
+}
+
+.r-footer-a {
+    display: flex;
+    justify-content: left;
+}
+
+.r-footer-a a {
+    text-decoration: none;
+    color: #222;
+    margin: 0 10px 10px;
+}
+
+.r-footer-text-wrap {
+    margin-left: 10px;
+    color: #696D71;
+    font-size: smaller;
+}
+
+.r-footer-text3 {
+    margin-top: 5px;
+}
+
+.r-footer-icon img {
+    height: 40px;
+}
+

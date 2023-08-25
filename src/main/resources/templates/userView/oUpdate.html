@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layouts/include_footer_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>마이페이지</title>
+    <style>
+        .o-lnb {
+            min-width: 1000px;
+            height: 50px;
+            background-color: #ededed;
+        }
+        .o-wrapper {
+            position: relative;
+            display: block;
+            margin: 0 auto;
+            width: 1000px;
+        }
+        .o-lnb-list {
+            font-family: 'Noto Sans KR', sans-serif;
+            height: 50px;
+            float: left;
+            display: flex;
+            padding-left: 20px;
+            line-height: 1;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .o-lnb-item {
+            position: relative;
+            display: inline-flex;
+            margin-right: 15px;
+            align-items: center;
+        }
+        .o-lnb-item a {
+            font-weight: bold;
+            color: #7790ad;
+            font-size: 13px;
+            text-decoration-line: none;
+        }
+    </style>
+    <!-- 부트스트랩 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body layout:fragment="content">
+<!-- 마이페이지 네비게이션 -->
+<div id="oContainer">
+    <div id="content">
+        <div class="o-lnb">
+            <div class="o-wrapper">
+                <ul class="o-lnb-list">
+                    <li class="o-lnb-item"><a href="#">내정보</a></li>
+                    <li class="o-lnb-item"><a href="#">내정보수정</a></li>
+                    <li class="o-lnb-item"><a href="#">비밀번호변경</a></li>
+                    <li class="o-lnb-item"><a href="#">관심매물</a></li>
+                    <li class="o-lnb-item"><a href="#">매물관리</a></li>
+                    <li class="o-lnb-item"><a href="#">최근본매물</a></li>
+                    <li class="o-lnb-item"><a href="#">1:1문의내역</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- 마이페이지 콘텐츠 세부 -->
+        <div style="width: 600px; height: 600px;">
+                 <span th:if="${userId != null}">
+                    <span th:text="${userName}"></span>님 환영합니다.<br/>
+                    (<span th:text="${userId}"></span>)<br/>
+                </span>
+        </div>
+
+
+        <div>
+            <div id="oJoinBtn-container">
+
+                <input type="button" class="btn btn-dark"
+                       onclick="history.back();" value="취소" style="width:47%" />
+                <input type="submit" class="btn btn-dark" value="수정" style="width:47%" />
+            </div>
+            <input type="button" class="btn btn-dark"
+                   onclick="location.href='#'" value="회원탈퇴" style="width:47%" />
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+
+<!-- merge 후 push 안한거 확인 -->

@@ -1,0 +1,50 @@
+
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.14'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.ap4j'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '11'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.webjars:sockjs-client:1.0.2'
+    implementation 'org.webjars:stomp-websocket:2.3.3'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation group: 'org.json', name: 'json', version: '20230618'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-web'  // 수정된 부분
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+    implementation 'org.json:json:20190722'
+    implementation 'com.google.code.gson:gson:2.9.0'    // gson 사용을 위해 추가
+    implementation 'org.springframework.boot:spring-boot-starter-validation'    // 유효성 검사를 위해 추가(스프링부트 2.3 이상부터 의존성 추가해야 사용 가능)
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+

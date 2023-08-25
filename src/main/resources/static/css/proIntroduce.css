@@ -1,0 +1,83 @@
+.total{
+    padding: 0 0 5rem;
+}
+.scrollContent{
+    max-width: 1232px;
+    margin: 0 auto;
+    padding: 0 1em;
+    height: 100%;
+}
+.proPageHeader{
+    position: relative;
+    margin: 0 0 1rem;
+    padding: 3rem 1rem;
+    font-size: 20px;
+    text-align: center;
+}
+
+#item1 {
+    opacity: 1;
+    -webkit-transform: scale(0.9);
+    -moz-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    -o-transform: scale(0.9);
+    transform: scale(0.9);
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+
+#item2, #item3, #item4, #item5, #item6, #item7{
+    opacity: 0;
+    -webkit-transform: translateY(50px) scale(0.9);
+    -moz-transform: translateY(50px) scale(0.9);
+    -ms-transform: translateY(50px) scale(0.9);
+    -o-transform: translateY(50px) scale(0.9);
+    transform: translateY(50px) scale(0.9);
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+
+#item2.visible, #item3.visible, #item4.visible, #item5.visible, #item6.visible, #item7.visible  {
+    opacity: 1;
+    -webkit-transform: translateY(0) scale(0.9);
+    -moz-transform: translateY(0) scale(0.9);
+    -ms-transform: translateY(0) scale(0.9);
+    -o-transform: translateY(0) scale(0.9);
+    transform: translateY(0) scale(0.9);
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+
+.proarray{
+    position: relative;
+    width: 25%;
+    height: 0;
+    padding-bottom: 20%;
+    overflow: hidden;
+    padding-right: 30px;
+    margin-right: 30px;
+}
+.pure-g{
+    display: flex;
+    /*padding-top: 10px;*/
+    /*padding-bottom: 10px;*/
+    margin: 0;
+    padding: 1.5rem;
+    border-bottom: 1px solid #d7d7d8;
+}
+.introduceImg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+

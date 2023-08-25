@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- configFragment -->
+<th:block th:fragment="configFragment">
+	<!-- Javascript file 예시 -->
+	<script type="text/javascript" th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js}"></script>
+	<link rel="stylesheet" th:href="@{/css/mainpage_header_footer.css}">
+
+	<!-- 채팅모달창 관련 -->
+	<link rel="stylesheet" th:href="@{/css/chat.css}">
+	<script src="/webjars/sockjs-client/1.0.2/sockjs.min.js"></script>
+	<script src="/webjars/stomp-websocket/2.3.3/stomp.min.js"></script>
+	<script th:src="@{/js/chat/chat.js}"></script>
+
+</th:block>
+
+</html>

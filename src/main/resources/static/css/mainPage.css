@@ -1,0 +1,192 @@
+/*웹 폰트 불러오기*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+/*메인페이지의 컨테이너*/
+.r-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/*검색창 컨테이너*/
+.r-search {
+    width: 750px;
+    display: flex;
+    margin: 150px 0px 0px;
+}
+
+.r-search .r-search-text {
+    width: 100%;
+    height: 80px;
+    padding: 0 50px;
+    border-radius: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #696D71;
+    box-shadow: 0 0 10px;
+}
+
+.r-icon-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 49px;
+    bottom: 0px;
+    background-color: white;
+    border-radius: 50px;
+    width: 150px; 
+    height: 78px;
+    box-shadow: 0 0 10px;
+    transition: 0.5s;
+}
+
+.r-search-text i {
+    position: relative;
+    right: 2px;
+    color: #696D71;
+    font-size: 42px;
+}
+
+.r-search-text input {
+    font-family: 'Noto Sans KR', sans-serif;   
+    font-weight: 700;
+    font-size: 28px;
+    border: none;
+    width: 100%;
+    color: white;
+    background-color: transparent;
+}
+
+.r-search-text input:focus {
+    outline:none;
+}
+
+.r-search-text:hover .r-icon-circle {
+    width: 100px;
+}
+
+.r-search-text input:focus::placeholder {
+    opacity: 0;
+}
+
+input::-webkit-input-placeholder { 
+    position: relative;
+    bottom: 2px;
+    color: white;
+}
+
+.r-main-title-text p{
+    font-family: 'Noto Sans KR', sans-serif;   
+    font-weight: 700;
+    font-size:100px;
+    margin: 50px ;
+    color: aliceblue;
+    box-shadow: 0 0 10px;
+}
+
+.r-button-menu {
+    display: flex;
+    margin-bottom: 300px;
+
+}
+
+.r-button-menu a {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #222;
+    background-color: aliceblue;
+    border-radius: 10px;
+    width: 115px;
+    height: 115px;
+    margin: 0 15px;
+    font-family: 'Noto Sans KR', sans-serif;   
+    font-weight: 500;
+    box-shadow: 0 0 10px;
+}
+
+.r-button-menu a .r-button-menu-icon1 {
+    width: 54px;
+    height: 54px;
+    margin-bottom: 12px;
+    background-image: url("/sc/bar-chart_738881.png");
+    background-size: contain; /* 이미지를 div 내부에 맞게 조절 */
+    background-repeat: no-repeat;
+    background-position: center; /* 이미지를 중앙에 위치시킴 */
+}
+
+.r-button-menu a .r-button-menu-icon2 {
+    width: 54px;
+    height: 54px;
+    margin-bottom: 12px;
+    background-image: url("/sc/free-icon-real-estate-942089.png");
+    background-size: contain; /* 이미지를 div 내부에 맞게 조절 */
+    background-repeat: no-repeat;
+    background-position: center; /* 이미지를 중앙에 위치시킴 */
+}
+
+.r-button-menu a .r-button-menu-icon3 {
+    width: 54px;
+    height: 54px;
+    margin-bottom: 12px;
+    background-image: url("/sc/free-icon-house-9507421.png");
+    background-size: contain; /* 이미지를 div 내부에 맞게 조절 */
+    background-repeat: no-repeat;
+    background-position: center; /* 이미지를 중앙에 위치시킴 */
+}
+
+.r-button-menu a .r-button-menu-icon5 {
+    width: 54px;
+    height: 54px;
+    margin-bottom: 12px;
+    background-image: url("/sc/notification_738876.png");
+    background-size: contain; /* 이미지를 div 내부에 맞게 조절 */
+    background-repeat: no-repeat;
+    background-position: center; /* 이미지를 중앙에 위치시킴 */
+}
+
+.r-button-menu a .r-button-menu-icon4 {
+    width: 54px;
+    height: 54px;
+    margin-bottom: 12px;
+    background-image: url("/sc/free-icon-news-4837038.png");
+    background-size: contain; /* 이미지를 div 내부에 맞게 조절 */
+    background-repeat: no-repeat;
+    background-position: center; /* 이미지를 중앙에 위치시킴 */
+}
+
+.r-button-menu a:hover div{
+    animation: swing 0.5s ease-out ;
+    transform-origin: bottom center;
+}
+
+@keyframes swing {
+    0%, 100% {
+      transform: rotate(0deg);
+    }
+    20%, 60% {
+      transform: rotate(15deg);
+    }
+    40%, 80% {
+      transform: rotate(-15deg);
+    }
+  }
+
+.n-background{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* 레이어를 최하단으로 설정 */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("https://images.unsplash.com/photo-1523192193543-6e7296d960e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sample Payment</title>
+  <!-- PortOne SDK -->
+  <script th:src="@{https://cdn.iamport.kr/v1/iamport.js}"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script th:inline="javascript">
+    var IMP = window.IMP;
+    IMP.init('imp67011510');
+
+    // 여러번 구매하는 기능.
+    function requestPay(merchant_uid) {
+      IMP.request_pay({
+        pg: "kcp",
+        pay_method: "card",
+        merchant_uid: "IMP" + merchant_uid,   // 주문번호
+        name: "이민주 뱃살 30kg",
+        amount: 990116,                         // 숫자 타입
+        buyer_email: "gildong@gmail.com",
+        buyer_name: "홍길동",
+        buyer_tel: "010-4242-4242",
+        buyer_addr: "서울특별시 강남구 신사동",
+        buyer_postcode: "01182"
+      }, function (rsp) {
+        if (rsp.success) {
+          console.log(rsp);
+        } else {
+          console.log(rsp);
+        }
+      });
+    }
+  </script>
+</head>
+<body>
+<button onclick="requestPay(Date.now())">결제하기</button>
+<button onclick="requestPay(Date.now() + 1)">또 다른 상품 결제하기</button>
+<!-- 결제하기 버튼 생성 -->
+</body>
+</html>

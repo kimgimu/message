@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layouts/include_footer_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 리스트 페이지</title>
+    <link rel="stylesheet" href="/resources/static/css/boardList.css">
+</head>
+
+<body layout:fragment="content">
+
+<div class="layout">
+    <h1>커뮤니티</h1>
+    <hr/>
+
+    <div class = "headrow">
+    <div class = "headrowL">
+        <input type="text" class = "searchbox" placeholder="검색어 입력">
+        <button class = "searchbtn">검색</button>
+    </div>
+    </div>
+    <hr/>
+
+    <div class = "headrowR">
+        <button type="button" class="writebtn" onclick="location.href = '/community/write'" >글쓰기</button>
+    </div>
+
+    <table id = "freeboard-tb">
+        <thead>
+        <tr>
+            <th class="b-n">번호</th>
+            <th class="b-t">제목</th>
+            <th class="b-w">작성자</th>
+            <th class="b-d">작성일</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="board : ${List}">
+            <td th:text = "${board.id}">1</td>
+            <td>
+                <a th:text = "${board.title}" th:href="@{/board/view(id=${board.id})}">제목</a>
+            </td>
+            <td th:text = "${board.write}">작성자</td>
+            <td th:text = "${board.regdata}">yyyy-mm-dd</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

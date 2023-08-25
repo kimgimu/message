@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>메뉴바아아</title>
+
+    <style>
+
+        .menu-bar{
+        width : 80%;
+        margin : auto;
+        margin-top: 40px;
+        }
+        .menu-c{
+        width: 200px;
+        height:50px;
+        border : #26A9E0;
+        border-bottom: 4px solid #26A9E0;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+        margin-top:5px;
+        background: #26A9E0;
+        outline: none;
+        color: #ffffff;
+        float:left;
+        }
+
+        .menu{
+        width: 200px;
+        height:50px;
+        border : #f8f8f8;
+        border-bottom: 4px solid #26A9E0;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+        margin-top:5px;
+        background: #f8f8f8;
+        outline: none;
+        color: #26A9E0;
+        float:left;
+        }
+
+        div button :hover{
+        /*color: #597812;*/
+        color: #FFD400;
+      }
+    </style>
+</head>
+<body>
+<div class="menu-bar">
+    <button type="button" class="menu-c" id="faq" onclick="location.href = '/faq/list'" >자주 묻는 질문</button>
+    <button type="button" class="menu" id="qna" onclick="location.href = '/qna'" >1:1 문의</button>
+    <button type="button" class="menu" id="notice" onclick="location.href = '/notice/list'" >공지사항</button>
+    <button type="button" class="menu" id="guide" onclick="location.href = '/guide'" >서비스 이용안내</button>
+</div>
+</body>
+</html>

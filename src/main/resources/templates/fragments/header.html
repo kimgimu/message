@@ -1,0 +1,61 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--headerFragment 선언-->
+<header th:fragment="headerFragment" class="header nav-bar-toggle-icon">
+<!--  <div if:유저가 로그인 했을 경우 보여주는 거>-->
+
+  <div class="n-header">
+    <div class="n-header-left">
+      <a href="/">
+      <img src="/sc/003.png" alt="">
+      </a>
+      <ul class="n-header-list">
+        <li>
+          <a href="#">실거래가조회</a>
+        </li>
+        <li>
+          <a href="#">매물등록</a>
+        </li>
+        <li>
+          <a href="#">청약정보</a>
+        </li>
+        <li>
+          <a href="/news">부동산뉴스</a>
+        </li>
+        <li>
+          <a href="#">커뮤니티</a>
+        </li>
+        <li>
+          <a href="#">전문가소개</a>
+        </li>
+      </ul>
+    </div>
+    <div class="n-header-right">
+<!--    <div class="n-header-right" th:with="member=null">-->
+      <ul th:if="${userEmail==null}" class="n-header-list">
+        <li>
+          <a href="/member/qLoginForm">로그인</a>
+        </li>
+        <li>
+          <a href="/member/qJoinForm">회원가입</a>
+        </li>
+        <li>
+          <a href="#">고객센터</a>
+        </li>
+      </ul>
+      <ul th:if="${userEmail!=null}" class="n-header-list">
+        <li>
+          <a href="/member/qLogout">로그아웃</a>
+        </li>
+        <li>
+          <a href="/member/qMyPage">마이페이지</a>
+        </li>
+        <li>
+          <a href="#">고객센터</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</header>
+</html>

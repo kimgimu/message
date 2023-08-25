@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layouts/include_footer_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <!-- favicon -->
+    <!-- 부트스트랩 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+          crossorigin="anonymous">
+    <style>
+        .form-floating {
+            width: 350px;
+        }
+        #oJoinBtn-container {
+            display: flex;
+            justify-content: space-evenly;
+        }
+        #oInner-container-join {
+            width: 400px;
+            height: 800px;
+        }
+        #oJoinTitle {
+            padding: 20px 50px;
+            margin: 0px;
+        }
+        #btnEmailCheck {
+            width: 90px;
+            margin-left: 6px;
+        }
+        <!-- 회원가입 유효성검사 -->
+        .fieldError {
+            border-color: red;
+            color: red;
+        }
+        .oAgree {
+            margin-right: 5px;
+        }
+        .oAgree-li {
+            margin: 10px;
+        }
+        .oAgree span {
+            color: blue;
+        }
+        <!-- 이메일 중복 체크 css -->
+        <!--.oIdOk {
+            color: #008000;
+            display: none;
+        }
+        .oIdExist {
+            color: red;
+            display: none;
+        }-->
+        .mustch {
+            font-weight: bold;
+            color: blue;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            <!-- 비밀번호/비밀번호 확인 일치 여부 체크, 비밀번호 형식 체크 -->
+            $("#pwd, #pwdCheck").focusout(function(){
+                let pwdValue = $('#pwd').val();
+                let pwdCheckValue = $('#pwdCheck').val();
+                if (pwdValue !== pwdCheckValue) {
+                    $("#opwdCheck1").css("display","block");
+                } else {
+                    $("#opwdCheck1").css("display","none");q
+                }
+            });
+            $("#pwd").keyup(function(){
+                let pwdValue = $(this).val();
+                if (pwdValue.length < 8 || pwdValue.length > 20) {
+                    $("#opwdCheck2").css("display","block");
+                } else {
+                    $("#opwdCheck2").css("display","none");
+                }
+            });
+            <!-- 이메일 형식 체크 -->
+            $("#email").keyup(function() {
+                let emailValue = $('#email').val();
+                let reg = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+                if (reg.test(emailValue) == false) {
+                    $("#emailErr").text("이메일 형식으로 입력해주세요.");
+                    $("#emailErr").css("color", "red");
+                } else {
+                    $("#emailErr").text("");
+                }
+            });
+            <!-- 이메일 중복 체크-->
+
+        });
+        function checkEmail() {
+            let email = $('#email').val();
+
+            $.ajax({
+                url: '/member/qEmailCheck',
+                type: 'post',
+                data: {email:email},
+                success:function(cnt) {
+                    if(email.length == 0) {
+                        alert('이메일은 필수 입력사항 입니다.');
+                    }
+                    if(cnt == 0) {
+                        $('#btnEmailCheck').attr('class','btn btn-primary');
+                        $('#btnEmailCheck').val("사용 가능");
+                   //     alert('이메일 사용이 가능합니다.');
+                    } else {
+                        $('#btnEmailCheck').attr('class','btn btn-danger');
+                        $('#btnEmailCheck').val("사용 불가");
+                   //     alert('이메일을 다시 입력해주세요.');
+                    //    $('#email').val('');
+                    }
+
+                },
+                error:function() {
+                    alert("에러입니다.");
+                }
+            });
+        };
+    </script>
+</head>
+<body layout:fragment="content">
+    <div class="oContainer-wrap">
+        <div class="container mt-5" id="oInner-container-join" style="background-color:white" align="center">
+    <!--            <img src="/images/qLogoForm.png" alt="logoImage" style="margin-bottom: 10px;">-->
+            <div id="oJoinTitle">
+                <h3 class="h3 fw-bold">회원가입</h3>
+            </div>
+            <form th:action="@{/member/qJoinBasic}" th:object="${memberDTO}" method="POST">
+                <div class="form-floating mb-3 mr-3" style="display:flex; flex-wrap:wrap">
+                    <input type="text" class="form-control" id="email" name="email" placeholder="myemail@email.com" autofocus="autofocus" style="width:254px;"
+                        th:field="*{email}" th:class="${#fields.hasErrors('email')} ? 'form-control fieldError' : 'form-control'" />
+                    <label th:for="email">이메일 주소</label>
+                    <input type="button" class="btn btn-outline-dark" id="btnEmailCheck" style="width:90px;" value="중복검사" onclick="checkEmail()" />
+                    <!-- email ajax 중복체크 onclick="checkEmail()" -->
+<!--                    <span class="oIdOk" style="display:none;">사용 가능한 이메일입니다.</span>
+                    <span class="oIdExist" style="display:none;">이미 존재하는 이메일입니다.</span>-->
+<!--                           onclick="location.href='/member/qEmailCheck'" />-->
+<!--                    <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="font-size:12px; text-align: left; color: red;">Incorrect data</p>-->
+<!--                    <p th:if="${emailCheck == true}">이메일 중복~</p>-->
+                    <div class="form-floating" id="emailErr" style="text-align:left; color:red; font-size:12px;"></div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="홍길동"
+                           th:field="*{name}" th:class="${#fields.hasErrors('name')} ? 'form-control fieldError' : 'form-control'">
+                    <label th:for="name">이름(실명)</label>
+                    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="font-size:12px; text-align: left; color: red;">>Incorrect data</p>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Password"
+                           th:field="*{pwd}" th:class="${#fields.hasErrors('pwd')} ? 'form-control fieldError' : 'form-control'">
+                    <label for="pwd">비밀번호(영문, 숫자 조합 8~20자 이내)</label>
+                    <div id="opwdCheck2" style="display:none; text-align:left; color:red; font-size:12px;">영문, 숫자를 조합하여 8~20자 이내로 입력해주세요.</div>
+<!--                    <p th:if="${#fields.hasErrors('pwd')}" th:errors="*{pwd}" style="font-size:12px; text-align: left; color: red;">>Incorrect data</p>-->
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="pwdCheck" name="pwdCheck" placeholder="Password">
+                    <div id="opwdCheck1" style="display:none; text-align:left; color:red; font-size:12px;">비밀번호가 일치하지 않습니다.</div>
+                    <label for="pwdCheck">비밀번호 확인</label>
+                </div>
+
+                <div class="form-floating" align="left" style="font-size: 12px;";>
+                    <ul style="list-style: none; padding: 0px; margin: 20px 0px 20px 0px; border-radius: 7px; border: 1px solid #dee2e6;">
+                        <li class="oAgree-li">
+                            <div>
+                                <h3 class="h3"></h3>
+                            </div>
+                            <div>
+                                <input type="checkbox" class="oAgree"><b>전체 동의하기</b>
+                            </div>
+                        </li>
+                        <li class="oAgree-li">
+                            <div>
+                                <input type="checkbox" class="oAgree"><span class="mustch">[필수] </span>만14세 이상입니다.
+                            </div>
+                        </li>
+                        <li class="oAgree-li">
+                            <div>
+                                <input type="checkbox" class="oAgree"><span class="mustch">[필수] </span>이용약관 동의
+                            </div>
+                        </li>
+                        <li class="oAgree-li">
+                            <div>
+                                <input type="checkbox" class="oAgree"><span class="mustch">[필수] </span>개인정보 수집·이용 동의
+                            </div>
+                        </li>
+                        <li class="oAgree-li">
+                            <div>
+                                <input type="checkbox" class="oAgree"><span class="mustch">[필수] </span>위치 기반 서비스약관 동의
+                            </div>
+                        </li>
+                        <li class="oAgree-li">
+                            <div>
+                                <input type="checkbox" class="oAgree"><span class="mustch">[필수] </span>매물 관리 정책 동의
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="oJoinBtn-container">
+                    <input type="button" class="btn btn-dark"
+                           th:onclick="|location.href='@{/}'|" value="취소" style="width:47%" />
+                    <input type="submit" class="btn btn-dark" value="회원가입" style="width:47%" />
+                    <!-- th:onclick="|location.href='@{/member/qLoginForm}'|"-->
+                </div>
+            </form>
+
+            <div class="container" id="oJoinSns" style="mt-5 mb-5">
+                <hr style="width: 380px;"/>
+                <p style="font-weight: bold; margin-bottom: 20px;">Join with SNS</p>
+                <div class="oJoinSnsBtn-container"
+                     style="display: flex; justify-content: space-between;">
+                    <!-- 카카오 회원가입 -->
+                    <a th:href="@{https://kauth.kakao.com/oauth/authorize?client_id=fae91fecfb7dbda2a80ae22881709a28&redirect_uri=http://localhost:8081/member/qLogin&response_type=code}">
+                        <img src="/images/kakao_join_medium_narrow.png" alt="kakaoJoin" height="44" />
+                    </a>
+                    <!--</div>
+                    <div class="oLoginSnsBtn-container">-->
+                    <!-- 네이버 회원가입 -->
+                    <a th:href="@{/member/qLoginNaver}">
+                        <img src="/images/btnG_완성형.png" alt="naverJoin" height="44" />
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- 부트스트랩 script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+            crossorigin="anonymous"></script>
+</body>
+</html>

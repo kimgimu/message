@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layouts/include_footer_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+    <!-- 부트스트랩 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+        <!-- * 부트스트랩으로 인한 충돌 / 헤더 위치 조정중 * -->
+        .n-header-list {
+            margin: 16px 0px;
+            padding: 0px 0px 0px 40px;
+        }
+        .form-floating {
+            width: 350px;
+        }
+        .form-check {
+            width: 350px;
+           <!-- display: flex; justify-content: right;
+            부트스트랩 충돌-인라인 태그로-->
+        }
+        #oInner-container {
+            width: 400px;
+            height: 700px;
+        }
+        .oFindTitle {
+            padding: 20px 50px;
+            margin: 0px;
+        }
+        .fieldError {
+            font-size: 10px;
+            color: red;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            $(".form-control").keyup(function(){
+                var emailValue = $(this).val();
+                if (emailValue == null || emailValue === '' || emailValue.length < 5) {
+                    $("#check").css("display","block");
+                } else {
+                    $("#check").css("display","none"); // Reset the color if the value is not empty
+                }
+            });
+        });
+    </script>
+</head>
+<body layout:fragment="content">
+<div class="container mt-5" id="oInner-container" align="center">
+    <div class="oFindTitle">
+        <h3 class="h3 fw-bold">이메일 찾기</h3>
+    </div>
+    <form th:action="@{/member/qLoginBasic}" method="POST">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="nameEmail" name="nameEmail" placeholder="이름을 입력해주세요." autofocus="autofocus" />
+            <label th:for="email">이름</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="telEmail" name="telEmail" placeholder="01012345678(하이픈 '-' 제외 숫자만)" />
+            <label th:for="name">연락처</label>
+        </div>
+        <div class="oFindBtn-container">
+            <input type="submit" class="btn btn-dark mb-3 mt-3" value="이메일 찾기" style="width:46%;" />
+        </div>
+    </form>
+
+    <div class="oFindTitle">
+        <h3 class="h3 fw-bold">비밀번호 찾기</h3>
+    </div>
+    <form th:action="@{/member/qLoginBasic}" method="POST">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="email" name="email" placeholder="youemail@email.com" autofocus="autofocus" />
+            <label th:for="email">이메일 주소</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="name" name="name" placeholder="홍길동" />
+            <label th:for="name">이름(실명)</label>
+        </div>
+        <div class="oFindBtn-container">
+            <input type="submit" class="btn btn-dark mb-3 mt-3" value="비밀번호 찾기" style="width:46%;" />
+        </div>
+    </form>
+</div>
+
+<!-- 부트스트랩 script -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>

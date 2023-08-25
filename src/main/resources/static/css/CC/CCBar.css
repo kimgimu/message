@@ -1,0 +1,33 @@
+
+        .menubar{
+        width : 95%;
+        margin : auto;
+        }
+
+        .menu-c{
+        width: 25%;
+        height:70px;
+        border : #26A9E0;
+        border-bottom: 4px solid #26A9E0;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+        margin-top:5px;
+        background: #26A9E0;
+        outline: none;
+        color: #ffffff;
+        float:left;
+        }
+
+        .menu{
+        width: 25%;
+        height:70px;
+        border : #f8f8f8;
+        border-bottom: 4px solid #26A9E0;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+        margin-top:5px;
+        background: #f8f8f8;
+        outline: none;
+        color: #26A9E0;
+        float:left;
+        }

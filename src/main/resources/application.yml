@@ -1,0 +1,63 @@
+# 서블릿 인코딩 강제 설정
+server:
+  port: 8081
+  servlet:
+    encoding:
+      force: true
+
+# Spring Devtools 설정과 H2 웹 콘솔 활성화 통합
+spring:
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+  h2:
+    console:
+      enabled: true
+
+  # Thymeleaf 설정
+  thymeleaf:
+    encoding: UTF-8
+    cache: false
+    prefix: classpath:templates/ # 여기에 경로쓰면 기본 경로로 됨. ㅎㅅㅎ
+    check-template-location: true
+    suffix: .html
+    mode: HTML
+
+  # Hibernate 설정
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        org:
+          hibernate:
+            SQL: DEBUG
+            type:
+              descriptor:
+                sql:
+                  BasicBinder: TRACE
+        show_sql: true
+    defer-datasource-initialization: true
+
+  # 데이터베이스 설정
+  datasource:
+    generate-unique-name: false
+
+  # 데이터베이스 설정
+
+#    url: jdbc:mysql://localhost:3306/pos
+#    username: root
+#    password: 45723922
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+
+  # 테스트 데이터 사용을 위해 data.sql(리소스 바로 아래 경로) 및
+  # yml 내용 임시 추가 - pjm
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver

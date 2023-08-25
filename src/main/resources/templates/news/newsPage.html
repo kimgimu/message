@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layouts/include_footer_layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .news-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .news-header h1 {
+            text-align: center;
+        }
+
+        /*아이템*/
+        .news-result {
+            background-color: white;
+            /*display: flex;*/
+            text-align: left;
+            margin: 30px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 30px;
+            margin-bottom: 0px;
+        }
+
+        .check {
+            border: 1px solid #e8ebee;
+            border-radius: 6px;
+            box-shadow: 0 1px 30px 0 rgba(0, 0, 0, .03);
+            background-color: #fff;
+            width: 1000px;
+        }
+
+        .news-result a {
+            font-size: 20px;
+        }
+
+        .news-search {
+            padding-bottom: 30px;
+            padding-top: 30px;
+            text-align: center;
+        }
+
+        .result-range {
+            display: flex;
+            flex-direction: column;
+            align-items: baseline;
+            min-height: 1050px;
+        }
+
+        .pagination {
+            text-align: center;
+            padding-top: 5px;
+            padding-bottom: 5px;
+
+        }
+        .pagination button{
+            width: 110px;
+            height: 50px;
+            background-color: aqua;
+            border-radius: 10px;
+            cursor:pointer;
+        }
+        .pagination a{
+            text-decoration: none;
+        }
+        /*.news-result > div:nth-child(1) {*/
+        /*    flex: 3;*/
+        /*}*/
+
+        /*.news-result > div:nth-child(2) {*/
+        /*    flex: 7;*/
+        /*    padding-left: 10px;*/
+        /*}*/
+        .news-result > div > p{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body layout:fragment="content">
+<div class="news-header">
+    <h1>부동산 뉴스</h1>
+    <form action="/news/newsPage" method="get">
+        <div class="news-search">
+            <input type="text" name="query" placeholder="검색어 입력">
+            <button type="submit">검색</button>
+        </div>
+    </form>
+    <div class="check">
+        <div class="result-range">
+            <div th:each="newsItem : ${newsList}">
+                <div class="news-result">
+                    <div>
+                        <a th:href="${newsItem.link}" th:text="${newsItem.title}" target="_blank"></a>
+                    </div>
+                    <div>
+                        <p th:text="${newsItem.description}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pagination">
+            <a th:if="${currentPage != 1}" th:href="@{/news/newsPage(query=${searchQuery}, page=${1}, start=${1})}">
+                <button type="button">&lt; 처음페이지 </button>
+            </a>
+            <a th:if="${currentPage > 1}" th:href="@{/news/newsPage(query=${searchQuery}, page=${currentPage - 1}, start=${start - 10})}">
+                <button type="button">&lt; 이전</button>
+            </a>
+            <span>페이지 <span th:text="${currentPage}"></span> / <span th:text="${totalPages}"></span></span>
+            <a th:if="${currentPage < totalPages}" th:href="@{/news/newsPage(query=${searchQuery}, page=${currentPage + 1}, start=${start + 10})}">
+                <button type="button">다음 &gt;</button>
+            </a>
+            <a th:if="${currentPage < totalPages}" th:href="@{/news/newsPage(query=${searchQuery}, page=${totalPages}, start=${(totalPages - 1) * itemsPerPage + 1})}">
+                <button type="button">마지막페이지 &gt;</button>
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

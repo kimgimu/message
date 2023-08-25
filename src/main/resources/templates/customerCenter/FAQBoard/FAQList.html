@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layouts/include_footer_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>고객센터</title>
+    <link rel="stylesheet" href="/resources/static/css/CC/fqnlist.css">
+    <link rel="stylesheet" href="/resources/static/css/CC/CCBar.css">
+
+</head>
+<body layout:fragment="content">
+<div class = "layout">
+    <h1>고객센터</h1>
+
+    <div class="menubar">
+        <button type="button" class="menu-c" id="faq" onclick="location.href = '/faq/list'" >자주 묻는 질문</button>
+        <button type="button" class="menu" id="qna" onclick="location.href = '/qna'" >1:1 문의</button>
+        <button type="button" class="menu" id="notice" onclick="location.href = '/notice/list'" >공지사항</button>
+        <button type="button" class="menu" id="guide" onclick="location.href = '/guide'" >서비스 이용안내</button>
+    </div>
+
+    <div class = "headrow">
+        <div class = "headrowL">
+            <input type="text" class = "searchbox" placeholder="검색어 입력">
+            <button class = "searchbtn">검색</button>
+        </div>
+    </div>
+    <hr/>
+    <table class="faq-tb">
+        <tr>
+            <th class="b-q">Q</th>
+            <th class="b-n">분류</th>
+            <th class="b-t">제목</th>
+        </tr>
+        <tr>
+            <td>Q</td>
+            <td>분류</td>
+            <td>자주 물어보는 질무운운</td>
+        </tr>
+    </table>
+    </div>
+</div>
+</body>
+</html>

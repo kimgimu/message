@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layouts/include_footer_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>고객센터</title>
+    <link rel="stylesheet" href="/resources/static/css/CC/CCBar.css">
+    <link rel="stylesheet" href="/resources/static/css/CC/qna.css">
+
+</head>
+
+<body layout:fragment="content">
+<div class="layout">
+    <h1>고객센터</h1>
+
+    <div class="menubar">
+        <button type="button" class="menu" id="faq" onclick="location.href = '/faq/list'" >자주 묻는 질문</button>
+        <button type="button" class="menu-c" id="qna" onclick="location.href = '/qna'" >1:1 문의</button>
+        <button type="button" class="menu" id="notice" onclick="location.href = '/notice/list'" >공지사항</button>
+        <button type="button" class="menu" id="guide" onclick="location.href = '/guide'" >서비스 이용안내</button>
+    </div>
+
+    <div id = "notice-box">
+        <p>
+        ＊ 아파트사조 서비스를 이용 중 문의사항(불편/개선사항 등)이 있으시면 언제든 말씀해 주세요.<br>
+        ＊ 담당자 확인 후 최대한 빠르게 처리해 드리겠습니다.<br>
+        ＊ 문의하신 내역은 <b class="boldtext">[내정보 > 1:1 문의내역]</b>에서 확인하실 수 있습니다.<br>
+        </p>
+    </div>
+    <hr/>
+    <form>
+    <div id = "tb-box">
+        <table border="1" class="qna-tb">
+            <tr>
+                <th>이름<b class="boldtext">＊</b></th>
+                <td>이름 가져와</td>
+            </tr>
+            <tr>
+                <th>이메일<b class="boldtext">＊</b></th>
+                <td>이메일 가져와</td>
+            </tr>
+            <tr>
+                <th>구분<b class="boldtext">＊</b></th>
+                <td>
+                    <select name="category">
+                        <option value="choice">선택해주세요</option>
+                        <option value="member">회원관련</option>
+                        <option value="jung">중개관련</option>
+                        <option value="maemae">매매관련</option>
+                        <option value="fake">허위매물</option>
+                        <option value="payment">결제관련</option>
+                        <option value="exc">기타</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>제목<b class="boldtext">＊</b></th>
+                <td><input type="text" id="title"></td>
+            </tr>
+            <tr>
+                <th>내용<b class="boldtext">＊</b></th>
+                <td><textarea></textarea></td>
+            </tr>
+            <tr>
+                <th>파일첨부</th>
+                <td>
+                    <div class="mb-3">
+                        <!--<input class="form-control" type="file" id="formFileMultiple" multiple>-->
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <p class="right-text"><b class="boldtext">＊</b>는 필수 입력 항목입니다.</p>
+        <div class="submit-btn-outer">
+        <button type="submit" class="submit-btn">등록</button>
+        </div>
+    </div>
+    </form>
+</div>
+
+</body>
+</html>

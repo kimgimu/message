@@ -1,0 +1,52 @@
+  .pre {
+  background-color: #f2f2f2;
+  padding: 10px;
+  position: fixed;
+  width: 50%;
+  bottom: 0;
+  left: 0;
+}
+
+.predetails ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.predetails ul li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.predetails ul li a {
+  color: #333;
+  text-decoration: none;
+}
+
+ .next {
+  background-color: #26A9E0;
+  padding: 10px;
+  width: 50%;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+}
+
+.nextdetails ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.nextdetails ul li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.nextdetails ul li a {
+  color: #333;
+  text-decoration: none;
+}
+

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layouts/include_footer_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>고객센터</title>
+    <link rel="stylesheet" href="/resources/static/css/CC/CCBar.css">
+    <link rel="stylesheet" href="/resources/static/css/CC/guide.css">
+
+</head>
+<body layout:fragment="content">
+<div class = "layout">
+            <h1>고객센터</h1>
+            <div class="menubar">
+                <button type="button" class="menu" id="faq" onclick="location.href = '/faq/list'" >자주 묻는 질문</button>
+                <button type="button" class="menu" id="qna" onclick="location.href = '/qna'" >1:1 문의</button>
+                <button type="button" class="menu" id="notice" onclick="location.href = '/notice/list'" >공지사항</button>
+                <button type="button" class="menu-c" id="guide" onclick="location.href = '/guide'" >서비스 이용안내</button>
+            </div>
+            <div id = "notice-box">
+                <p>
+                    <b>아파트 실거래가가 궁금할 땐! '아파트 사조'</b><br>
+                    ‘아파트사조’는 공공데이터 를 어쩌구 해서 전국 모든 아파트의 실거래가와 위치 정보 제공은 물론 <br>
+                    매물 등록과 검색, 학군 및 상권정보, 통계와 뉴스까지 다양한 정보를 제공하고 있는 '아파트 부동산 플랫폼'입니다.
+                </p>
+            </div>
+            <hr/>
+            <div class="about-web">
+            여기에는 웹 사이트 소개가<br>
+            들어갑니다 !
+            <br>
+                웹사이트 기능입니다<br>
+                장점입니다<br>
+                기술스택입니다<br>
+
+            <button type="button" class="gohome" onclick="location.href = '메인주소넣어'" >메인</button>
+            <div>
+      </div>
+</body>
+</html>
